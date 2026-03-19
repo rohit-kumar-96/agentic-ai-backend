@@ -2,8 +2,11 @@
 
 SESSION_MEMORY = {}
 
+MAX_HISTORY = 10
+
 def get_history(session_id: str):
     return SESSION_MEMORY.get(session_id, [])
+
 
 def save_message(session_id: str, role: str, content: str):
     if session_id not in SESSION_MEMORY:
@@ -13,3 +16,6 @@ def save_message(session_id: str, role: str, content: str):
         "role": role,
         "content": content
     })
+
+    # keep last N messages only
+    SESSION_MEMORY[session_id] = SESSION_MEMORY[session_id][-MAX_HISTORY:]

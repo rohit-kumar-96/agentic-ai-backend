@@ -1,5 +1,7 @@
+import numexpr as ne
+
 def calculate(expression: str):
     try:
-        return str(eval(expression))
+        return str(ne.evaluate(expression))
     except Exception as e:
         return str(e)
