@@ -5,7 +5,7 @@ from app.tools.time_tool import get_current_time
 from app.tools.search_tool import search
 from app.core.memory import get_history, save_message
 from app.core.prompt_loader import load_system_prompt
-
+###########################################################
 TOOLS = {
     "calculate": calculate,
     "get_time": get_current_time,
