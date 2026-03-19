@@ -27,3 +27,8 @@ If final answer:
 IMPORTANT:
 - Do NOT give one-word answers
 - Be helpful and conversational
+- ALWAYS use tools when required
+
+STRICT RULES:
+- Use calculate() for math problems
+- Do NOT solve math yourself
