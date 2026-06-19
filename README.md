@@ -1,87 +1,273 @@
-Author:
-Rohit Kumar
+# Agentic AI Backend
 
+**Author:** Rohit Kumar
 
-Agentic AI Backend:
-A production-ready AI agent backend built using FastAPI and LLMs.
-The system can reason, call tools, maintain memory, and execute tasks dynamically.
+A production-ready AI Agent backend built with FastAPI and Ollama-powered LLMs. The system can reason, invoke tools, maintain session memory, and generate context-aware responses.
 
-Features:
-Agentic AI with tool-calling capability
-Multi-step reasoning loop
-Session-based memory (context-aware conversations)
+---
 
-Tool integration:
-Calculator
-Time retrieval
-Search (mock → upgrade to real API)
-FastAPI backend with Swagger UI
-Structured logging for debugging
+## Features
 
-Architecture:
+* Agentic AI with tool-calling capability
+* Multi-step reasoning workflow
+* Session-based conversational memory
+* Calculator tool integration
+* Current time retrieval
+* Search tool (mock implementation)
+* FastAPI REST API
+* Interactive Swagger documentation
+* Structured logging for debugging and monitoring
+
+---
+
+## Architecture
+
+```text
 User Input
-   ↓
+    │
+    ▼
 Fallback Layer (Deterministic Rules)
-   ↓
+    │
+    ▼
 Tool Execution (if applicable)
-   ↓
-LLM Agent Loop (reasoning + decision)
-   ↓
-Response + Memory Update
+    │
+    ▼
+LLM Agent Loop (Reasoning + Decision Making)
+    │
+    ▼
+Response Generation
+    │
+    ▼
+Memory Update
+```
 
-Tech Stack:
-Python
-FastAPI
-Ollama (LLM - llama3)
-Uvicorn
-Numexpr (safe math evaluation)
+---
 
-Setup Instructions:
-1. Clone repo
+## Tech Stack
+
+* Python 3.11+
+* FastAPI
+* Ollama
+* Llama 3
+* Uvicorn
+* NumExpr
+* OpenAI SDK
+* Python Dotenv
+
+---
+
+## Prerequisites
+
+Before running the application, install:
+
+### Python
+
+```bash
+python --version
+```
+
+### Git
+
+```bash
+git --version
+```
+
+### Ollama
+
+Download and install Ollama:
+
+https://ollama.com/download
+
+Verify installation:
+
+```bash
+ollama --version
+```
+
+---
+
+## Quick Start
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/<your-username>/agentic-ai-backend.git
 cd agentic-ai-backend
-2. Create virtual environment
+```
+
+### 2. Create a Virtual Environment
+
+#### Windows
+
+```bash
 python -m venv venv
-
-Activate:
-
 venv\Scripts\activate
-3. Install dependencies
+```
+
+#### Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-4. Run application
+```
+
+### 4. Download the Required LLM
+
+```bash
+ollama pull llama3
+```
+
+Verify installation:
+
+```bash
+ollama list
+```
+
+### 5. Start Ollama
+
+```bash
+ollama serve
+```
+
+> Note: If Ollama is already running, you may see a port binding message. This is normal.
+
+### 6. Run the Application
+
+```bash
 uvicorn app.main:app --reload
-5. Open API Docs
-http://127.0.0.1:8000/docs
+```
 
+Expected output:
 
+```text
+INFO: Uvicorn running on http://127.0.0.1:8000
+INFO: Application startup complete.
+```
 
-Example Requests
-1. Math
+---
+
+## API Documentation
+
+Once the server is running:
+
+| Endpoint                           | Description           |
+| ---------------------------------- | --------------------- |
+| http://127.0.0.1:8000/docs         | Swagger UI            |
+| http://127.0.0.1:8000/openapi.json | OpenAPI Specification |
+| http://127.0.0.1:8000/health       | Health Check          |
+
+---
+
+## Example Requests
+
+### Calculator
+
+```json
 {
-  "message": "what is 12 * 7",
+  "message": "What is 12 * 7?",
   "session_id": "user1"
 }
-2. Time
+```
+
+### Current Time
+
+```json
 {
-  "message": "what is current time",
+  "message": "What is the current time?",
   "session_id": "user1"
 }
-3. Search
+```
+
+### Search
+
+```json
 {
-  "message": "search AI trends",
+  "message": "Search AI trends",
   "session_id": "user1"
 }
+```
 
-Current Limitations
-Search tool is mocked (planned upgrade to real API)
-Memory is in-memory (not persistent)
-Limited tool set (extensible design)
+---
 
-Future Improvements:
-Real API integration (search, weather, etc.)
-Multi-step planning agent
-Persistent memory (Redis)
-Streaming responses
-Authentication & rate limiting
+## Project Structure
 
+```text
+agentic-ai-backend/
+│
+├── app/
+│   ├── agent/
+│   ├── routes/
+│   ├── tools/
+│   ├── models/
+│   └── main.py
+│
+├── requirements.txt
+├── README.md
+└── .env
+```
 
+---
+
+## Current Limitations
+
+* Search tool uses mock responses
+* Memory is stored in-memory only
+* No persistent storage
+* Limited tool ecosystem
+
+---
+
+## Future Improvements
+
+* Real search API integration
+* Weather and external service tools
+* Redis-based persistent memory
+* Multi-step planning agents
+* Streaming responses
+* Authentication and authorization
+* Rate limiting and monitoring
+
+---
+
+## Troubleshooting
+
+### Ollama Not Found
+
+```text
+'ollama' is not recognized as an internal or external command
+```
+
+Install Ollama and restart your terminal.
+
+### Failed to Connect to Ollama
+
+```text
+ConnectionError: Failed to connect to Ollama
+```
+
+Verify:
+
+```bash
+ollama serve
+ollama list
+```
+
+### Port Already in Use
+
+Run on a different port:
+
+```bash
+uvicorn app.main:app --reload --port 8001
+```
+
+---
+
+## License
+
+This project is intended for educational, learning, and demonstration purposes.
