@@ -7,6 +7,3 @@ def call_llm(messages, tools=None):
     )
 
     return response
-
-
-

@@ -5,3 +5,8 @@ python-dotenv
 ollama
 numexpr
 numpy
+python-docx
+chromadb
+pypdf
+sentence-transformers
+python-multipart
